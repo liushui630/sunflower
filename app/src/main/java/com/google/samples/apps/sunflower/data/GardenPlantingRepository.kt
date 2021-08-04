@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.data
 
+import com.google.samples.apps.sunflower.data.db.GardenPlanting
+import com.google.samples.apps.sunflower.data.db.GardenPlantingDao
 import javax.inject.Inject
 import javax.inject.Singleton
 

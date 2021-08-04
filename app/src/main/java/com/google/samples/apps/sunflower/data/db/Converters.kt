@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.di
+package com.google.samples.apps.sunflower.data.db
 
-import com.google.samples.apps.sunflower.data.http.api.UnsplashService
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import androidx.room.TypeConverter
+import java.util.Calendar
 
-@InstallIn(SingletonComponent::class)
-@Module
-class NetworkModule {
+/**
+ * Type converters to allow Room to reference complex data types.
+ */
+class Converters {
+    @TypeConverter fun calendarToDatestamp(calendar: Calendar): Long = calendar.timeInMillis
 
-    @Singleton
-    @Provides
-    fun provideUnsplashService(): UnsplashService {
-        return UnsplashService.create()
-    }
+    @TypeConverter fun datestampToCalendar(value: Long): Calendar =
+        Calendar.getInstance().apply { timeInMillis = value }
 }
